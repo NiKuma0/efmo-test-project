@@ -1,8 +1,8 @@
-export class UserCreatedRequest {
+export class UserCreatedEventData {
   entityId: number;
 }
 
-export class UserUpdatedRequest {
+export class UserUpdatedEventData {
   entityId: number;
   changedColumns: string[];
 }

@@ -3,9 +3,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserEntity } from './users.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_USERNAME,
+      database: process.env.DB_NAME,
+      synchronize: true,
+      entities: [UserEntity],
+    }),
+    TypeOrmModule.forFeature([UserEntity]),
+    ClientsModule.register([
+      { name: 'EventsService', transport: Transport.TCP },
+    ]),
+  ],
   controllers: [UserController],
   providers: [UsersService],
 })

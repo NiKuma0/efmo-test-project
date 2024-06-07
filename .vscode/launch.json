@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Standart",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run",
+          "start:debug"
+        ],
+        "autoAttachChildProcesses": true,
+        "restart": true,
+        "sourceMaps": true,
+        "stopOnEntry": false,
+        "console": "integratedTerminal",
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Evenents",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run",
+          "start:debug",
+          "--",
+          "events"
+        ],
+        "autoAttachChildProcesses": true,
+        "restart": true,
+        "sourceMaps": true,
+        "stopOnEntry": false,
+        "console": "integratedTerminal",
+      }
+    ]
+}

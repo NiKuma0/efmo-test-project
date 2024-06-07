@@ -9,6 +9,16 @@ import {
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'sqlite',
+      // host: 'localhost',
+      // port: 5432,
+      // username: 'postgres',
+      // password: 'postgres',
+      database: 'app.db',
+      synchronize: true,
+      entities: [UserCreatedEventEntity, UserUpdatedEventEntity],
+    }),
     TypeOrmModule.forFeature([UserCreatedEventEntity, UserUpdatedEventEntity]),
   ],
   controllers: [EventsController],

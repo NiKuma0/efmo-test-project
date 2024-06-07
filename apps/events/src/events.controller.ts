@@ -1,22 +1,23 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
 
-import { UserCreatedRequest, UserUpdatedRequest } from './events.dto';
+import { UserCreatedEventData, UserUpdatedEventData } from './events.dto';
 import { EventsService } from './events.service';
 
-@Controller('events')
+@Controller()
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
-  @Post('userCreated')
-  userCreatedTrigger(@Body() event: UserCreatedRequest): Promise<void> {
-    return this.eventsService.userCreatedTrigger(event.entityId);
+  @EventPattern('userCreated')
+  userCreatedTrigger(data: UserCreatedEventData): Promise<void> {
+    return this.eventsService.userCreatedTrigger(data.entityId);
   }
 
-  @Post('userUpdated')
-  userUpdatedTrigger(@Body() event: UserUpdatedRequest): Promise<void> {
+  @EventPattern('userUpdated')
+  userUpdatedTrigger(data: UserUpdatedEventData): Promise<void> {
     return this.eventsService.updatedTrigger(
-      event.entityId,
-      event.changedColumns,
+      data.entityId,
+      data.changedColumns,
     );
   }
 }
