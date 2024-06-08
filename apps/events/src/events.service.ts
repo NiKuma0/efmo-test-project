@@ -2,21 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import {
-  UserUpdatedEventEntity,
-  UserCreatedEventEntity,
-} from './events.entity';
+import { UpdatedEventEntity, CreatedEventEntity } from './events.entity';
 
 @Injectable()
 export class EventsService {
   constructor(
-    @InjectRepository(UserUpdatedEventEntity)
-    private readonly usersUpdatedRepository: Repository<UserUpdatedEventEntity>,
-    @InjectRepository(UserCreatedEventEntity)
-    private readonly usersCreatedRepository: Repository<UserCreatedEventEntity>,
+    @InjectRepository(UpdatedEventEntity)
+    private readonly usersUpdatedRepository: Repository<UpdatedEventEntity>,
+    @InjectRepository(CreatedEventEntity)
+    private readonly usersCreatedRepository: Repository<CreatedEventEntity>,
   ) {}
 
-  async userCreatedTrigger(userId: number): Promise<void> {
+  async createdTrigger(userId: number): Promise<void> {
     const newEvent = this.usersCreatedRepository.create({ entityId: userId });
     await this.usersCreatedRepository.save(newEvent);
   }

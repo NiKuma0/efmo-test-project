@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export abstract class Event {
+export abstract class EventEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,10 +12,10 @@ export abstract class Event {
 }
 
 @Entity()
-export class UserCreatedEventEntity extends Event {}
+export class CreatedEventEntity extends EventEntity {}
 
 @Entity()
-export class UserUpdatedEventEntity extends Event {
+export class UpdatedEventEntity extends EventEntity {
   @Column({ array: true })
   changedColumns: string[];
 }

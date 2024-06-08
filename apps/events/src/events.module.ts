@@ -2,24 +2,21 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventsController } from './events.controller';
 import { EventsService } from './events.service';
-import {
-  UserCreatedEventEntity,
-  UserUpdatedEventEntity,
-} from './events.entity';
+import { CreatedEventEntity, UpdatedEventEntity } from './events.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      // host: 'localhost',
-      // port: 5432,
-      // username: 'postgres',
-      // password: 'postgres',
-      database: 'app.db',
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'app',
       synchronize: true,
-      entities: [UserCreatedEventEntity, UserUpdatedEventEntity],
+      entities: [CreatedEventEntity, UpdatedEventEntity],
     }),
-    TypeOrmModule.forFeature([UserCreatedEventEntity, UserUpdatedEventEntity]),
+    TypeOrmModule.forFeature([CreatedEventEntity, UpdatedEventEntity]),
   ],
   controllers: [EventsController],
   providers: [EventsService],

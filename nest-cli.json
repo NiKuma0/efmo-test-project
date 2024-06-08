@@ -27,6 +27,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/events/tsconfig.app.json"
       }
+    },
+    "issues": {
+      "type": "application",
+      "root": "apps/issues",
+      "entryFile": "main",
+      "sourceRoot": "apps/issues/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/issues/tsconfig.app.json"
+      }
     }
   }
 }
